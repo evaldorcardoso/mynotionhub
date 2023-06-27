@@ -1,73 +1,46 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# 🚀 My Notion Hub
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+My Notion Hub é uma API feita no framework Nest.js que usa a API do Notion para realizar as consultas. Com essa API, você pode conectar um banco de dados do Notion ao seu projeto e acessar os dados dele de forma simples e rápida.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 📝 Como usar
 
-## Description
+Para usar a API, você precisa ter uma aplicação Notion criada e autorizada na sua conta do Notion. Você também precisa ter um banco de dados do Notion que deseja conectar à API.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### 🔑 Criando uma aplicação Notion
 
-## Installation
+Para criar uma aplicação Notion, siga os passos descritos na [documentação oficial](https://developers.notion.com/docs/getting-started).
+
+Você vai precisar do **Notion secret** da sua aplicação, que é um token que permite a API acessar os dados do Notion. Guarde esse token em um lugar seguro.
+
+### 🗃️ Vinculando um banco de dados do Notion
+
+Para vincular um banco de dados do Notion à API, você precisa obter o **ID do banco de dados**. Você pode encontrar esse ID na URL do banco de dados, depois de `https://www.notion.so/`.
+
+Por exemplo, se a URL do seu banco de dados é `https://www.notion.so/My-Database-1234567890abcdef`, o ID do banco de dados é `1234567890abcdef`.
+
+Você também precisa compartilhar o seu banco de dados com a sua aplicação Notion, para que ela possa acessar os dados dele. Para isso, siga os passos descritos na [documentação oficial](https://developers.notion.com/docs/sharing).
+
+### 🛡️ Autenticando na API
+
+Para autenticar na API, você precisa passar na request uma autorização do tipo **Bearer** com o **Notion secret** da sua aplicação. Você também precisa passar o **ID do banco de dados** que deseja conectar como um parâmetro de query chamado `databaseId`.
+
+Por exemplo, se o seu Notion secret é `sk_abc123` e o ID do seu banco de dados é `1234567890abcdef`, a request seria algo assim:
 
 ```bash
-$ yarn install
+curl -X GET https://mynotionhub.vercel.app/notion/1234567890abcdef \
+  -H 'Authorization: Bearer sk_abc123' \
+  -G \
 ```
 
-## Running the app
+A resposta da API será um objeto JSON com os dados do seu banco de dados do Notion.
 
-```bash
-# development
-$ yarn run start
+## 🌐 Endpoints
 
-# watch mode
-$ yarn run start:dev
+A API possui os seguintes endpoints:
 
-# production mode
-$ yarn run start:prod
-```
+- `GET /notion/{databaseId}`: Retorna os dados do banco de dados do Notion conectado.
+- `POST /notion/{databaseId}/query`: Filtra os dados no banco de dados do Notion conectado.
 
-## Test
+## 👥 Contribuindo
 
-```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+Se você quiser contribuir para o projeto, sinta-se à vontade para fazer um fork, criar uma branch e enviar um pull request. Qualquer sugestão ou feedback é bem-vinda.
